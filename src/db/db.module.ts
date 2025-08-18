@@ -9,7 +9,7 @@ import { getConfig } from '../config/configuration';
         const {
           database: { host, port, password, user, dbName, dbType },
         } = getConfig();
-        Logger.debug(host, port, user, dbName);
+        Logger.debug('Database connection details:', host, port, user, dbName);
         return {
           type: dbType,
           host,

@@ -24,6 +24,9 @@ export class UserEntity extends BaseEntity {
   })
   passwordHash: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
   token: string;
 }

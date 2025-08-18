@@ -1,84 +1,86 @@
-# Nest.js starter kit
+# Nest.js 脚手架
+
+[English](README.md) | [中文](README-zh.md)
 
 [![test](https://github.com/zhao-core/nestjs-starter-kit/workflows/Test/badge.svg)](https://github.com/zhao-core/nestjs-starter-kit/actions?query=workflow%3A%22Test%22) [![codecov](https://codecov.io/gh/zhao-core/nestjs-starter-kit/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/zhao-core/nestjs-starter-kit)
 
-This is a starter kit for typical Nest.js REST API project.
+这是一个 Nest.js REST API 项目的脚手架。
 
-## Motivation
+## 项目动机
 
-The main goal of this project is to provide fully functional [Nest.js](https://nestjs.com/) app which can be used as a started kit for creating your own REST APIs.
+这个项目的主要目标是提供一个功能完整的 [Nest.js](https://nestjs.com/) 应用程序，可以作为创建 REST API 的脚手架。
 
-Usually it is not enough to just run `$ nest new project` and start writing required business logic. Nest.js provides a minimal application out of the box with only one controller and service. In most cases it is required to pull and setup a bunch of additional packages from Nest.js ecosystem like `typeorm`, `passport`, `cache-manager`, DTO validators etc.
+通常情况下，仅仅运行 `$ nest new project` 并开始编写所需的业务逻辑是不够的。Nest.js 提供的最小应用程序只有一个控制器和服务。在大多数情况下，需要从 Nest.js 生态系统中引入和设置一系列额外的包，如 `typeorm`、`passport`、`cache-manager`、DTO 验证器等。
 
-This repo provides an already configured REST API project with commonly used Nest.js packages (full list below) so you can just copy it and start writing your business logic and not waste your time for boilerplate configuration.
+这个仓库提供了一个已经配置好的 REST API 项目，包含了常用的 Nest.js 包（完整列表见下文），所以你可以直接复制它并开始编写业务逻辑，而不用浪费时间在样板配置上。
 
-## Features
+## 功能特性
 
-- [Nest.js starter kit](#nestjs-starter-kit)
-  - [Motivation](#motivation)
-  - [Features](#features)
-    - [Dockerized local development](#dockerized-local-development)
-    - [Configuration via ENV variables](#configuration-via-env-variables)
-    - [Validation via DTO](#validation-via-dto)
-    - [DB migrations](#db-migrations)
-    - [Redis cache](#redis-cache)
-    - [JWT auth with passport.js](#jwt-auth-with-passportjs)
-    - [Logger with Trace ID generation](#logger-with-trace-id-generation)
-    - [Graceful shutdown](#graceful-shutdown)
-    - [Automatic APIs documentation with Swagger](#automatic-apis-documentation-with-swagger)
-    - [E-mail service with local mail trap](#e-mail-service-with-local-mail-trap)
-    - [Unit tests](#unit-tests)
-    - [Pm2 start](#pm2-start)
-    - [Cors-middleware](#cors-middleware)
-    - [Helmet-middleware](#helmet-middleware)
-    - [Response-middleware](#response-middleware)
-  - [Installation](#installation)
-    - [Prerequisites](#prerequisites)
-    - [Getting started](#getting-started)
+- [Nest.js 脚手架](#nestjs-脚手架)
+  - [项目动机](#项目动机)
+  - [功能特性](#功能特性)
+    - [Docker 化本地开发](#docker-化本地开发)
+    - [通过环境变量配置](#通过环境变量配置)
+    - [通过 DTO 验证](#通过-dto-验证)
+    - [数据库迁移](#数据库迁移)
+    - [Redis 缓存](#redis-缓存)
+    - [基于 passport.js 的 JWT 认证](#基于-passportjs-的-jwt-认证)
+    - [带追踪 ID 生成的日志记录](#带追踪-id-生成的日志记录)
+    - [优雅关闭](#优雅关闭)
+    - [使用 Swagger 自动生成 API 文档](#使用-swagger-自动生成-api-文档)
+    - [带本地邮件捕获的邮件服务](#带本地邮件捕获的邮件服务)
+    - [单元测试](#单元测试)
+    - [Pm2 启动](#pm2-启动)
+    - [Cors 中间件](#cors-中间件)
+    - [Helmet 中间件](#helmet-中间件)
+    - [响应中间件](#响应中间件)
+  - [安装](#安装)
+    - [前置要求](#前置要求)
+    - [快速开始](#快速开始)
 
-### Dockerized local development
+### Docker 化本地开发
 
-You are getting fully functional docker environment for development with Postgres DB, Redis and utility services such as local SMTP server. You can spin-up all server dependencies with only 1 command without need of setting up DB and Redis servers manually.
+你将获得一个功能完整的开发 Docker 环境，包含 Postgres 数据库、Redis 和实用服务，如本地 SMTP 服务器。你只需一个命令就能启动所有服务器依赖，无需手动设置数据库和 Redis 服务器。
 
-Check out [.docker-node-api](./.docker-node-api) folder and [installation guide](#installation) for more details.
+查看 [.docker-node-api](./.docker-node-api) 文件夹和[安装指南](#安装)了解更多详情。
 
-### Configuration via ENV variables
+### 通过环境变量配置
 
-According to [12 factor app](https://12factor.net/config) - it is recommended to store application config in Environment Variables. This technique allows you to build the bundle once and deploy it to multiple target server (e.g. QA, Staging, Prod) without code modifications. Each target environment will have different configuration values which application retrieves from environment variables.
+根据 [12 factor app](https://12factor.net/config) 的建议，推荐将应用程序配置存储在环境变量中。这种技术允许你构建一次包，并将其部署到多个目标服务器（如 QA、Staging、生产环境），而无需修改代码。每个目标环境将有不同的配置值，应用程序从环境变量中获取这些值。
 
-This project provides a set of config values out of the box e.g. for connecting to DB and Cache server. Check out [app.module.ts](./api/src/app.module.ts#L14) and [configuration.ts](./api/src/services/app-config/configuration.ts) for more details.
+这个项目提供了一套开箱即用的配置值，例如用于连接数据库和缓存服务器。查看 [app.module.ts](./api/src/app.module.ts#L14) 和 [configuration.ts](./api/src/services/app-config/configuration.ts) 了解更多详情。
 
-### Validation via DTO
+### 通过 DTO 验证
 
-Global [ValidationPipeline](./api/src/main.ts) enabled and requests to APIs are validated via [DTOs](./api/src/user/dto).
+启用了全局 [ValidationPipeline](./api/src/main.ts)，API 请求通过 [DTOs](./api/src/user/dto) 进行验证。
 
-### DB migrations
+### 数据库迁移
 
-`TypeORM` DB migrations are already set up for you in [./api/src/db/migrations](./api/src/db/migrations) folder.
+`TypeORM` 数据库迁移已在 [./api/src/db/migrations](./api/src/db/migrations) 文件夹中为你设置好。
 
-To generate new migration run:
+要生成新的迁移，运行：
 
 ```console
 npm run migrations:new -- src/db/migrations/Roles
 ```
 
-To apply migrations run:
+要应用迁移，运行：
 
 ```console
 npm run migrations:up
 ```
 
-To revert migrations run:
+要回滚迁移，运行：
 
 ```console
 npm run migrations:revert
 ```
 
-### Redis cache
+### Redis 缓存
 
-[cache-manager](https://github.com/BryanDonovan/node-cache-manager#readme) package with Redis store is available in [app-cache.module.ts](./api/src/app-cache/app-cache.module.ts).
+带有 Redis 存储的 [cache-manager](https://github.com/BryanDonovan/node-cache-manager#readme) 包在 [app-cache.module.ts](./api/src/app-cache/app-cache.module.ts) 中可用。
 
-So it is possible to use [`CacheInterceptor`](./api/src/user/user.controller.ts#L50) above you controller methods or classes:
+因此可以在控制器方法或类上使用 [`CacheInterceptor`](./api/src/user/user.controller.ts#L50)：
 
 ```typescript
   @UseInterceptors(CacheInterceptor)
@@ -86,7 +88,7 @@ So it is possible to use [`CacheInterceptor`](./api/src/user/user.controller.ts#
   async getUsers() {}
 ```
 
-Or inject `CacheManager` and use it directly:
+或者注入 `CacheManager` 并直接使用：
 
 ```typescript
 constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
@@ -94,41 +96,41 @@ constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 await this.cacheManager.get('key');
 ```
 
-### JWT auth with passport.js
+### 基于 passport.js 的 JWT 认证
 
-JWT authentication is configured and available to use.
+JWT 认证已配置并可以使用。
 
-User registration, login and JWT-protected API examples were added in [user.controller.ts](./api/src/user/user.controller.ts)
+用户注册、登录和 JWT 保护的 API 示例已添加到 [user.controller.ts](./api/src/user/user.controller.ts) 中。
 
-### Logger with Trace ID generation
+### 带追踪 ID 生成的日志记录
 
-[Pino](https://github.com/pinojs/pino) added as application logger.
+[Pino](https://github.com/pinojs/pino) 作为应用程序日志记录器。
 
-Each request to API is signed with unique TraceID and passed to logger via [AsyncLocalStorage](https://nodejs.org/api/async_context.html#class-asynclocalstorage).
+每个 API 请求都会分配一个唯一的 TraceID，并通过 [AsyncLocalStorage](https://nodejs.org/api/async_context.html#class-asynclocalstorage) 传递给日志记录器。
 
-Code can be found in [async-storage.middleware.ts](./api/src/global/middleware/async-storage/async-storage.middleware.ts) and [app-logger.service.ts](./api/src/logger/services/app-logger/app-logger.service.ts)
+代码可在 [async-storage.middleware.ts](./api/src/global/middleware/async-storage/async-storage.middleware.ts) 和 [app-logger.service.ts](./api/src/logger/services/app-logger/app-logger.service.ts) 中找到。
 
-<img width="799" alt="TraceID in logs example" src="https://user-images.githubusercontent.com/5843270/143482882-84c51e0e-0e54-407b-8ed7-cf7b8536f7e3.png">
+<img width="799" alt="日志中的 TraceID 示例" src="https://user-images.githubusercontent.com/5843270/143482882-84c51e0e-0e54-407b-8ed7-cf7b8536f7e3.png">
 
-### Graceful shutdown
+### 优雅关闭
 
-Nest.js [shutdown hooks](https://docs.nestjs.com/fundamentals/lifecycle-events#application-shutdown) are enabled.
+启用了 Nest.js [关闭钩子](https://docs.nestjs.com/fundamentals/lifecycle-events#application-shutdown)。
 
-This starter kit subscribed to `OnModuleDestroy` event and [disconnects](./api/src/app-cache/app-cache.module.ts) from Redis gracefully.
+这个脚手架订阅了 `OnModuleDestroy` 事件，并[优雅地断开](./api/src/app-cache/app-cache.module.ts) Redis 连接。
 
-### Automatic APIs documentation with Swagger
+### 使用 Swagger 自动生成 API 文档
 
-Nest.js swagger module configured with the use of [Swagger CLI plugin](https://docs.nestjs.com/openapi/cli-plugin).
+配置了 Nest.js swagger 模块，使用 [Swagger CLI 插件](https://docs.nestjs.com/openapi/cli-plugin)。
 
-API docs are generated with the start of app server automatically and available at [http://localhost:9797/swagger](http://localhost:9797/swagger):
+API 文档在应用服务器启动时自动生成，可在 [http://localhost:9797/swagger](http://localhost:9797/swagger) 访问：
 
-<img width="1485" alt="Swagger doc generated" src="https://user-images.githubusercontent.com/5843270/143483373-a0f3fd48-4f27-4d53-9b8f-6b80bc147d48.png">
+<img width="1485" alt="生成的 Swagger 文档" src="https://user-images.githubusercontent.com/5843270/143483373-a0f3fd48-4f27-4d53-9b8f-6b80bc147d48.png">
 
-### E-mail service with local mail trap
+### 带本地邮件捕获的邮件服务
 
-Mail service is available out of the box and can be used like this:
+邮件服务开箱即用，可以这样使用：
 
-Inject in constructor:
+在构造函数中注入：
 
 ```typescript
 constructor(
@@ -136,35 +138,35 @@ constructor(
 ) {}
 ```
 
-Send mail:
+发送邮件：
 
 ```typescript
 await this.mailer.send({
   to: 'to-mail@example.com',
   from: this.mailer.from(),
-  subject: 'User registered',
-  text: 'Mail body',
+  subject: '用户注册',
+  text: '邮件内容',
 });
 ```
 
-You can check sent mails by opening http://localhost:8025/ and browse MailHog UI.
+你可以通过打开 http://localhost:8025/ 并浏览 MailHog UI 来查看已发送的邮件。
 
 ![MailHog UI](https://user-images.githubusercontent.com/5843270/143854275-1415cf0d-0003-4744-9f25-4649a1b406c9.png)
 
-Powered by [nodemailer](https://www.npmjs.com/package/nodemailer).
+由 [nodemailer](https://www.npmjs.com/package/nodemailer) 提供支持。
 
-### Unit tests
+### 单元测试
 
-All code added in the project is covered with [unit tests](https://github.com/zhao-core/nestjs-starter-kit/search?q=describe).
+项目中添加的所有代码都有[单元测试](https://github.com/zhao-core/nestjs-starter-kit/search?q=describe)覆盖。
 
-You can find useful tests examples of:
+你可以找到有用的测试示例：
 
-- DB repository mock [(auth.service.spec.ts)](./api/src/user/services/auth/auth.service.spec.ts). Search for `getRepositoryToken`.
-- Controller test [(user.controller.spec.ts)](./api/src/user/user.controller.spec.ts)
-- Middleware test [(async-storage.middleware.spec.ts)](./api/src/global/middleware/async-storage/async-storage.middleware.spec.ts)
-- Service test [(jwt.service.spec.ts)](./api/src/user/services/jwt/jwt.service.spec.ts)
+- 数据库仓库模拟 [(auth.service.spec.ts)](./api/src/user/services/auth/auth.service.spec.ts)。搜索 `getRepositoryToken`。
+- 控制器测试 [(user.controller.spec.ts)](./api/src/user/user.controller.spec.ts)
+- 中间件测试 [(async-storage.middleware.spec.ts)](./api/src/global/middleware/async-storage/async-storage.middleware.spec.ts)
+- 服务测试 [(jwt.service.spec.ts)](./api/src/user/services/jwt/jwt.service.spec.ts)
 
-### Pm2 start
+### Pm2 启动
 
 ```console
 npm run pm2:start
@@ -174,63 +176,62 @@ npm run pm2:start
 npm run pm2:stop
 ```
 
-### Cors-middleware
+### Cors 中间件
 
-This is the Nest Middleware wrapper around cors. (https://github.com/wbhob/nest-middlewares/tree/master/packages/cors)
+这是围绕 cors 的 Nest 中间件包装器。(https://github.com/wbhob/nest-middlewares/tree/master/packages/cors)
 
-### Helmet-middleware
+### Helmet 中间件
 
-This is the Nest Middleware wrapper around helmet. (https://github.com/wbhob/nest-middlewares/tree/master/packages/helmet)
+这是围绕 helmet 的 Nest 中间件包装器。(https://github.com/wbhob/nest-middlewares/tree/master/packages/helmet)
 
-### Response-middleware
+### 响应中间件
 
-This is the Nest Middleware wrapper around response-time. (https://github.com/wbhob/nest-middlewares/tree/master/packages/response-time)
+这是围绕 response-time 的 Nest 中间件包装器。(https://github.com/wbhob/nest-middlewares/tree/master/packages/response-time)
 
-## Installation
+## 安装
 
-### Prerequisites
+### 前置要求
 
 - Docker for Desktop
 - Node.js LTS
 
-### Getting started
+### 快速开始
 
-- Clone the repository
+- 克隆仓库
 
 ```console
 git clone https://github.com/zhao-core/nestjs-starter-kit.git
 ```
 
-- Run docker containers (DB, Redis, etc)
+- 运行 Docker 容器（数据库、Redis 等）
 
 ```console
-cd nestjs-starter-kit/.docker-node-api
 docker-compose up -d
 ```
 
-- Go to api folder and copy env file
+- 进入 api 文件夹并复制环境变量文件
 
 ```console
 cd ../api
 cp .env.example .env
 ```
 
-- Update .env file with credentials if needed
+- 如需要，更新 .env 文件中的凭据
 
-- Next install dependencies
+- 接下来安装依赖
 
 ```console
-npm ci
+npm install
 ```
 
-- Init config and run migrations
+- 初始化配置并运行迁移
 
 ```console
 npm run migrations:up
 ```
 
-- Run application
+- 运行应用程序
 
 ```console
-npm start
+npm start:dev
 ```

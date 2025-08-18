@@ -1,35 +1,12 @@
 version: '3.8'
 
 networks:
- nest-ssr-net:
-    driver: bridge
+    nest-api-net:
+        driver: bridge
 services:
-
-  # ### DB ################################################
-  # postgresql:
-  #   restart: always
-  #   container_name: v_postgresql_nest_api
-  #   #image: arm64v8/postgres:latest
-  #   image: postgres:latest
-  #   ports:
-  #     - ${POSTGRES_PORT}:5432
-  #   environment:
-  #     POSTGRES_USER: ${POSTGRES_USER}
-  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  #     POSTGRES_DB: ${POSTGRES_DB}
-  #     PGDATA: /var/lib/postgresql/data/pgdata
-  #   # healthcheck:
-  #   #   test: ["CMD-SHELL", "netstat -tnlp|grep 5432 || exit 1"]
-  #   #   interval: 10s
-  #   #   timeout: 20s
-  #   #   retries: 3
-  #   networks:
-  #     -nest-ssr-net
-
   ### Redis ################################################
   redis:
-      image: arm64v8/redis:latest
-      # image: redis:latest
+      image: redis:latest
       container_name: v_redis_nest_api
       command:
         - /bin/sh
@@ -42,17 +19,17 @@ services:
       env_file:
         - ./.env
       # healthcheck:
-      #   test: ["CMD-SHELL", "netstat -tnlp|grep 6379 || exit 1"]
-      #   interval: 10s
-      #   timeout: 20s
-      #   retries: 3
+      #     test: ["CMD-SHELL", "netstat -tnlp|grep 6379 || exit 1"]
+      #     interval: 10s
+      #     timeout: 20s
+      #     retries: 3
       ports:
         - ${REDIS_PORT}:6379
       volumes:
-        - /.docker/redis:/data
+        - ./.docker/redis:/data
       networks:
-        -nest-ssr-net
-  
+        - nest-api-net
+
   mysql:
     image: mysql:8.4.2
     restart: always
@@ -68,9 +45,11 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD} # 设置专用用户密码
       MYSQL_DATABASE: ${MYSQL_DB} # 自动创建数据库
     networks:
-      -nest-ssr-net
+        - nest-api-net
     ### Mail trap ################################################
   mailhog:
-    image: mailhog/mailhog
-    restart: always
-    ports: ['1025:1025', '8025:8025']
+      image: mailhog/mailhog
+      restart: always
+      ports: ['1025:1025', '8025:8025']
+      networks:
+        - nest-api-net
