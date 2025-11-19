@@ -21,7 +21,7 @@ describe('config helper', () => {
     expect(getConfig()).toStrictEqual({
       cache: {
         host: 'localhost',
-        password: '',
+        password: 'redis_secret',
         port: 6379,
       },
       database: {
@@ -30,7 +30,7 @@ describe('config helper', () => {
         host: 'localhost',
         password: 'secret',
         port: 3306,
-        user: 'root',
+        user: 'myroot',
       },
       jwtSecret: 'secret',
       logLevel: 'debug',

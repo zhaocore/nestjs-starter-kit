@@ -26,7 +26,7 @@ services:
       ports:
         - ${REDIS_PORT}:6379
       volumes:
-        - ./.docker/redis:/data
+        - ./.docker/data/redis:/data
       networks:
         - nest-api-net
 
