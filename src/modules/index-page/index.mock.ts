@@ -176,7 +176,7 @@ export default {
               },
               subtitle: '沈腾贾玲杨迪版《想见你》',
               title: '王牌对王牌·经典重演',
-              img: '//liangcang-material.alicdn.com/prod/upload/09b717c6e2a4416997b9ce27a01bb31f.gif',
+              img: '//m.ykimg.com/058400005E76AE64A9F97D0D329783A1',
               summary: '05-03期',
             },
             {
@@ -192,7 +192,7 @@ export default {
               },
               subtitle: '小鲜肉送房遭女嘉宾疯狂争抢',
               title: '非诚勿扰·天价宠妻',
-              img: '//liangcang-material.alicdn.com/prod/upload/6fedf054dec6461faffe6192e98dfda1.jpg',
+              img: '//m.ykimg.com/058400005E76AE64A9F97D0D329783A1',
               summary: '05-02期',
             },
             {
@@ -208,7 +208,7 @@ export default {
               },
               subtitle: '男博士自带极光千里追妹',
               title: '新相亲·甜出尖叫',
-              img: '//liangcang-material.alicdn.com/prod/upload/acff793120d740438b839ce4046f44d2.gif',
+              img: '//m.ykimg.com/058400005E76AE64A9F97D0D329783A1',
               summary: '04-26期',
             },
             {
@@ -224,7 +224,7 @@ export default {
               },
               subtitle: '小岳岳挖坑遭孙越狂撅',
               title: '德云社🔥神段子',
-              img: '//liangcang-material.alicdn.com/prod/upload/3f7f5f413342426595aafbdc94da9c86.jpg',
+              img: '//m.ykimg.com/058400005E76AE64A9F97D0D329783A1',
               summary: '7期全',
             },
             {
@@ -240,7 +240,7 @@ export default {
               },
               subtitle: '代表公平公正的国宝！',
               title: '国宝🔥商鞅方升',
-              img: '//liangcang-material.alicdn.com/prod/upload/79bcd67b69fe46208f68188c199a9316.jpg',
+              img: '//m.ykimg.com/058400005E76AE64A9F97D0D329783A1',
               summary: '04-28集',
             },
             {
@@ -256,7 +256,7 @@ export default {
               },
               subtitle: '卷福米勒双面怪杰',
               title: '弗兰肯斯坦·重磅',
-              img: '//liangcang-material.alicdn.com/prod/upload/0d568483409e45578ccd716a25d92449.jpg',
+              img: '//m.ykimg.com/058400005E76AE64A9F97D0D329783A1',
               summary: '更新至2集',
             },
           ],
