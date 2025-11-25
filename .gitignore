@@ -37,4 +37,13 @@ lerna-debug.log*
 
 # Custom
 .env
+.env.local
 ormconfig.json
+
+# Local data directory (SQLite databases)
+/data/*
+!data/.gitkeep
+*.db
+*.db-journal
+*.db-shm
+*.db-wal

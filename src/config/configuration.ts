@@ -5,13 +5,15 @@ export const getConfig = (): AppConfig => {
     logLevel: process.env.LOG_LEVEL || 'info',
     database: {
       dbType: (process.env.DB_TYPE as any) || 'mysql',
-      host: process.env.MYSQL_HOST as string,
-      port: parseInt(process.env.MYSQL_PORT as string, 10) || 3306,
-      user: process.env.MYSQL_USER as string,
-      password: process.env.MYSQL_PASSWORD as string,
-      dbName: process.env.MYSQL_DB as string,
+      host: process.env.DB_HOST as string,
+      port: parseInt(process.env.DB_PORT as string, 10) || 3306,
+      user: process.env.DB_USER as string,
+      password: process.env.DB_PASSWORD as string,
+      dbName: process.env.DB_DB as string,
+      database: process.env.DB_DATABASE as string, // For SQLite
     },
     cache: {
+      useMemoryCache: process.env.USE_MEMORY_CACHE === 'true',
       host: process.env.REDIS_HOST as string,
       port: parseInt(process.env.REDIS_PORT as string, 10) || 6379,
       password: process.env.REDIS_PASSWORD as string,
@@ -40,15 +42,17 @@ export interface AppConfig {
 }
 
 export interface DbConfig {
-  dbType: 'mysql' | 'postgres';
+  dbType: 'mysql' | 'postgres' | 'better-sqlite3';
   host: string;
   port: number;
   user: string;
   password: string;
   dbName: string;
+  database: string; // For SQLite file path
 }
 
 export interface CacheConfig {
+  useMemoryCache: boolean;
   host: string;
   port: number;
   password: string;

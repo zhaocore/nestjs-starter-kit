@@ -33,17 +33,17 @@ services:
   mysql:
     image: mysql:8.4.2
     restart: always
-    container_name: v_mysql_nest_api
+    container_name: v_DB_nest_api
     volumes:
       - ./.docker/data/mysql:/var/lib/mysql # 挂载目录，持久化存储
     ports:
-      - ${MYSQL_PORT}:3306
+      - ${DB_PORT}:3306
     environment:
       TZ: Asia/Shanghai # 设置时区
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD} # 设置 root 用户的密码
-      MYSQL_USER: ${MYSQL_USER} # 创建专用用户
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # 设置专用用户密码
-      MYSQL_DATABASE: ${MYSQL_DB} # 自动创建数据库
+      DB_ROOT_PASSWORD: ${DB_PASSWORD} # 设置 root 用户的密码
+      DB_USER: ${DB_USER} # 创建专用用户
+      DB_PASSWORD: ${DB_PASSWORD} # 设置专用用户密码
+      DB_DATABASE: ${DB_DB} # 自动创建数据库
     networks:
         - nest-api-net
     ### Mail trap ################################################

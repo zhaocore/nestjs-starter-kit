@@ -40,9 +40,31 @@
 
 ### Docker 化本地开发
 
-你将获得一个功能完整的开发 Docker 环境，包含 Postgres 数据库、Redis 和实用服务，如本地 SMTP 服务器。你只需一个命令就能启动所有服务器依赖，无需手动设置数据库和 Redis 服务器。
+你将获得一个功能完整的开发 Docker 环境,包含 Postgres 数据库、Redis 和实用服务,如本地 SMTP 服务器。你只需一个命令就能启动所有服务器依赖,无需手动设置数据库和 Redis 服务器。
 
 查看 [.docker-node-api](./.docker-node-api) 文件夹和[安装指南](#安装)了解更多详情。
+
+### 本地快速启动
+
+**新功能!** 现在支持使用 SQLite 数据库和内存缓存进行本地快速启动,无需配置 MySQL/PostgreSQL 和 Redis:
+
+```bash
+# 直接运行(自动使用 SQLite 和内存缓存)
+npm run start:local
+
+# 或使用 npx(需要先构建)
+npm run build
+npx nest-api
+```
+
+本地模式特性:
+
+- ✅ 使用 SQLite 数据库(自动创建在 `./data/local.db`)
+- ✅ 使用内存缓存(无需 Redis)
+- ✅ 自动创建数据表(synchronize: true)
+- ✅ 无需任何外部依赖即可启动
+
+查看 [LOCAL_START.md](./LOCAL_START.md) 了解详细的本地启动指南。
 
 ### 通过环境变量配置
 

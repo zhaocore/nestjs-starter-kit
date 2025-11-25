@@ -23,8 +23,10 @@ describe('config helper', () => {
         host: 'localhost',
         password: 'redis_secret',
         port: 6379,
+        useMemoryCache: false,
       },
       database: {
+        database: undefined,
         dbName: 'api',
         dbType: 'mysql',
         host: 'localhost',

@@ -1,0 +1,28 @@
+# Data Directory
+
+This directory is used to store local SQLite database files when running in local mode.
+
+The SQLite database file `local.db` will be automatically created here when you run:
+
+```bash
+npm run start:local
+```
+
+## Files
+
+- `local.db` - Main SQLite database file (auto-generated)
+- `local.db-journal` - Journal file for database transactions
+- `local.db-shm` - Shared memory file
+- `local.db-wal` - Write-ahead log file
+
+All these files are git-ignored and will be created automatically.
+
+## Clean Data
+
+To reset the local database, simply delete this directory:
+
+```bash
+rm -rf ./data
+```
+
+It will be recreated on next startup.
