@@ -10,7 +10,7 @@ export const getConfig = (): AppConfig => {
       user: process.env.DB_USER as string,
       password: process.env.DB_PASSWORD as string,
       dbName: process.env.DB_DB as string,
-      database: process.env.DB_DATABASE as string, // For SQLite
+      databasePath: process.env.DB_DATABASE_PATH as string, // For SQLite
     },
     cache: {
       useMemoryCache: process.env.USE_MEMORY_CACHE === 'true',
@@ -48,7 +48,7 @@ export interface DbConfig {
   user: string;
   password: string;
   dbName: string;
-  database: string; // For SQLite file path
+  databasePath: string; // For SQLite file path
 }
 
 export interface CacheConfig {

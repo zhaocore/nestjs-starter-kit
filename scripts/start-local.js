@@ -8,7 +8,7 @@ dotenv.config();
 // 设置本地运行环境变量
 process.env.NODE_ENV = 'local';
 process.env.DB_TYPE = 'better-sqlite3';
-process.env.DB_DATABASE = process.env.DB_DATABASE || path.join(process.cwd(), 'data', 'local.db');
+process.env.DB_DATABASE_PATH = process.env.DB_DATABASE_PATH || path.join(process.cwd(), 'data', 'local.db');
 process.env.USE_MEMORY_CACHE = 'true';
 process.env.PORT = process.env.PORT || '3000';
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'local-dev-secret-key-change-in-production';
@@ -22,7 +22,7 @@ if (!fs.existsSync(dataDir)) {
 }
 
 console.log('Starting in local mode...');
-console.log('Database:', process.env.DB_DATABASE);
+console.log('Database:', process.env.DB_DATABASE_PATH);
 console.log('Cache: In-Memory');
 console.log('Port:', process.env.PORT);
 

@@ -26,7 +26,7 @@ describe('config helper', () => {
         useMemoryCache: false,
       },
       database: {
-        database: undefined,
+        databasePath: undefined,
         dbName: 'api',
         dbType: 'mysql',
         host: 'localhost',

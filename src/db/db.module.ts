@@ -7,7 +7,15 @@ import { getConfig } from '../config/configuration';
     TypeOrmModule.forRootAsync({
       useFactory: async () => {
         const {
-          database: { host, port, password, user, dbName, dbType, database },
+          database: {
+            host,
+            port,
+            password,
+            user,
+            dbName,
+            dbType,
+            databasePath,
+          },
         } = getConfig();
 
         Logger.debug('Database connection details:', {
@@ -16,14 +24,14 @@ import { getConfig } from '../config/configuration';
           port,
           user,
           dbName,
-          database,
+          databasePath,
         });
 
         // SQLite configuration
         if (dbType === 'better-sqlite3') {
           return {
             type: dbType,
-            database: database || './data/local.db',
+            database: databasePath || './data/local.db',
             autoLoadEntities: true,
             synchronize: true, // Auto-create tables in local mode
             logging: false,
