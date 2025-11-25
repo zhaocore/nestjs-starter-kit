@@ -20,9 +20,20 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const message = exception.message;
     const stack = exception.stack;
 
-    this.logger.error(
-      `[${request.method}] ${request.url} ${status} ${message} ${stack}`,
-    );
+    // 忽略浏览器开发工具和常见的探测请求
+    const ignoredPaths = [
+      '/.well-known/appspecific/com.chrome.devtools.json',
+      '/favicon.ico',
+    ];
+
+    if (
+      !ignoredPaths.includes(request.url) &&
+      !request.url.startsWith('/.well-known/')
+    ) {
+      this.logger.error(
+        `[${request.method}] ${request.url} ${status} ${message} ${stack}`,
+      );
+    }
 
     response.status(status).json({
       Code: -1,

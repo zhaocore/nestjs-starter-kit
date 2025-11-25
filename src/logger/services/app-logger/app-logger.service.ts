@@ -11,7 +11,7 @@ export class AppLoggerService implements LoggerService {
   constructor(
     @Inject(ASYNC_STORAGE)
     private readonly asyncStorage: AsyncLocalStorage<Map<string, string>>,
-    private readonly configService: ConfigService,
+    configService: ConfigService,
   ) {
     const logLevel = configService.get('logLevel');
 

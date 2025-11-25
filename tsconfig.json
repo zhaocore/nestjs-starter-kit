@@ -1,24 +1,30 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ESNext",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "strictBindCallApply": true,
-    "paths": {
-      "@/*": ["src/*"],
-    }
-  }
+	"compileOnSave": true,
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "ES2018",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"inlineSourceMap": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"stripInternal": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"pretty": true,
+		"declaration": true,
+		"jsx": "react-jsx",
+		"outDir": "dist",
+		"types": ["node", "jest"],
+		"typeRoots": ["./typings", "./node_modules/@types"],
+		"paths": {
+			"~/*": ["./*"],
+			"@/*": ["./web/*"],
+			"~src/*": ["./src/*"],
+			"_build/*": ["./build/*"]
+		}
+	},
+	"include": ["src", "web", "test"]
 }

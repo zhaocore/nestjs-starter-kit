@@ -12,7 +12,7 @@ export class MailService {
   private readonly fromValue: string;
   private transport: Transporter<SMTPTransport.SentMessageInfo>;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(readonly configService: ConfigService) {
     const {
       from,
       transportOptions: {

@@ -2,9 +2,12 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
+import { join } from 'path';
 import 'module-alias/register'; // 解决路径别名问题
 import { AppModule } from './app.module';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { getCwd, initialSSRDevProxy, loadConfig } from 'ssr-common-utils';
 import { AppLoggerService } from './logger/services/app-logger/app-logger.service';
 
 function setupSwagger(app: INestApplication<any>) {
@@ -24,7 +27,13 @@ function setupSwagger(app: INestApplication<any>) {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  // SSR 相关初始化
+  await initialSSRDevProxy(app);
+  app.useStaticAssets(join(getCwd(), './build'));
+  app.useStaticAssets(join(getCwd(), './public'));
+  app.useStaticAssets(join(getCwd(), './build/client'));
+  app.useStaticAssets(join(getCwd(), './public'));
 
   /*
     Required to be executed before async storage middleware
@@ -48,12 +57,13 @@ async function bootstrap() {
 
   setupSwagger(app);
 
-  const port = process.env.PORT || 9797;
+  const { serverPort } = loadConfig();
+  await app.listen(serverPort, '0.0.0.0');
 
-  await app.listen(port, '0.0.0.0');
-
-  logger.log(`App started on http://localhost:${port}`);
-  logger.log(`Swagger Document started on http://localhost:${port}/swagger`);
+  logger.log(`App started on http://localhost:${serverPort}`);
+  logger.log(
+    `Swagger Document started on http://localhost:${serverPort}/swagger`,
+  );
 }
 
 bootstrap();

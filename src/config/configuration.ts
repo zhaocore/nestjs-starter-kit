@@ -2,7 +2,7 @@ export const getConfig = (): AppConfig => {
   return {
     port: parseInt(process.env.PORT as string, 10) || 3000,
     jwtSecret: process.env.JWT_SECRET as string,
-    logLevel: process.env.LOG_LEVEL || 'info',
+    logLevel: process.env.LOG_LEVEL || 'debug',
     database: {
       dbType: (process.env.DB_TYPE as any) || 'mysql',
       host: process.env.DB_HOST as string,

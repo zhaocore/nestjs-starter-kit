@@ -13,6 +13,8 @@ import { TasksModule } from './schedule/tasks.module';
 import { CorsMiddleware } from '@nest-middlewares/cors';
 import { HelmetMiddleware } from '@nest-middlewares/helmet';
 import { ResponseTimeMiddleware } from '@nest-middlewares/response-time';
+import { DetailModule } from './modules/detail-page/detail.module';
+import { IndexModule } from './modules/index-page/index.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { ResponseTimeMiddleware } from '@nest-middlewares/response-time';
     LoggerModule,
     ScheduleModule.forRoot(),
     TasksModule,
+    DetailModule,
+    IndexModule,
   ],
 })
 export class AppModule {
@@ -35,12 +39,19 @@ export class AppModule {
     // consumer.apply(AsyncStorageMiddleware).forRoutes('*');
     // CsurfMiddleware.configure({ cookie: true });
     // consumer.apply(CsurfMiddleware).forRoutes('*');
-    // HelmetMiddleware.configure( /* options as per helmet docs */ );
+    HelmetMiddleware.configure({
+      contentSecurityPolicy: {
+        directives: {
+          scriptSrc: ["'self'", "'unsafe-inline'"], // SSR 需要 'unsafe-inline'
+          imgSrc: ["'self'", 'data:', 'https:', 'http:'], // 允许图片从各种来源加载
+        },
+      },
+    });
     consumer
       .apply(
         AsyncStorageMiddleware,
         CorsMiddleware,
-        HelmetMiddleware,
+        // HelmetMiddleware, // SSR 暂时关闭
         ResponseTimeMiddleware,
       )
       .forRoutes('*');
