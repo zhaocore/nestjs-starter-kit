@@ -17,7 +17,7 @@
 		"build:rspack": "ssr build --tool rspack",
 		"prebuild": "rimraf dist",
 		"build": "nest build",
-		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"web/**/*.ts\" \"web/**/*.tsx\"",
 		"verify:local": "node scripts/verify-local-config.js",
 		"start:local": "node scripts/start-local.js",
 		"start:dev": "nest start --watch",
@@ -38,8 +38,8 @@
 		"migrations:revert": "npm run typeorm migration:revert -- -d ./type-orm.config.ts",
 		"type-check": "tsc --noEmit",
 		"release": "standard-version",
-		"prepare": "husky && husky install && npm run type-check && prettier --write \"{src,apps,libs}/**/*\" ",
-		"commit-lint": "commitlint --config commitlint.config.js -e -V"
+		"prepare": "husky && husky install && npm run type-check && prettier --write \"{src,apps,libs,web,test}/**/*\" ",
+		"commit-lint": ""
 	},
 	"dependencies": {
 		"@nest-middlewares/cors": "^10.0.0",

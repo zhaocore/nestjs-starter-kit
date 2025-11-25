@@ -23,7 +23,7 @@ describe('config helper', () => {
         host: 'localhost',
         password: 'redis_secret',
         port: 6379,
-        useMemoryCache: false,
+        useMemoryCache: true,
       },
       database: {
         databasePath: undefined,
