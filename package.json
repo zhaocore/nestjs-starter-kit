@@ -39,7 +39,7 @@
 		"type-check": "tsc --noEmit",
 		"release": "standard-version",
 		"prepare": "husky && husky install && npm run type-check && prettier --write \"{src,apps,libs,web,test}/**/*\" ",
-		"commit-lint": ""
+		"commit-lint": "commitlint --config commitlint.config.js -e -V"
 	},
 	"dependencies": {
 		"@nest-middlewares/cors": "^10.0.0",
